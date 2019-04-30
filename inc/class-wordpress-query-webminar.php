@@ -71,6 +71,7 @@ if ( ! class_exists( 'WordPress_Query_Webminar' ) ) {
 		public function init() {
 			require_once PLUGIN_PATH . 'inc/admin/class-wordpress-query-webminar-admin.php';
 			require_once PLUGIN_PATH . 'inc/admin/cpt/class-wp-query-cpt-films.php';
+			require_once PLUGIN_PATH . 'inc/shortcode/wp-query-shortcodes.php';
 		}
 
 		/**

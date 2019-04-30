@@ -52,21 +52,27 @@ if ( ! class_exists( 'WP_Query_CPT_Films' ) ) {
 					'description'         => __( 'This is where Films are stored.', 'wp-query' ),
 					'public'              => true,
 					'show_ui'             => true,
-					'capability_type'     => 'post',
+					'capability_type'     => 'page',
 					'map_meta_cap'        => true,
 					'publicly_queryable'  => true,
+					'query_var'           => true,
 					'exclude_from_search' => true,
 					'show_in_menu'        => true,
-					'hierarchical'        => true,
+					'hierarchical'        => false,
 					'show_in_nav_menus'   => true,
-					'rewrite'             => false,
+					'rewrite'             => array(
+						'slug' => 'films',
+						'with_front' => false,
+					),
+					'show_in_rest' => true,
 					'query_var'           => true,
 					'supports'            => array( 'title', 'editor', 'thumbnail' ),
-					'has_archive'         => false,
+					'has_archive'         => true,
 					'menu_icon'           => 'dashicons-format-video',
 				);
 
 				register_post_type( self::$films, $films_post_type_args );
+				flush_rewrite_rules();
 
 				/**
 				 * Register Taxonomy Genre
@@ -84,12 +90,15 @@ if ( ! class_exists( 'WP_Query_CPT_Films' ) ) {
 				);
 
 				register_taxonomy( 'genre', array( self::$films ), array(
-					'hierarchical'      => true,
-					'labels'            => $labels_tax,
-					'show_ui'           => true,
-					'show_admin_column' => true,
-					'query_var'         => true,
-					'rewrite'           => array( 'slug' => 'genre' ),
+					'labels'                     => $labels_tax,
+					'hierarchical'               => true,
+					'show_ui'                    => true,
+					'show_in_rest'               => true,
+					'show_admin_column'          => true,
+					'query_var'                  => true,
+					'rewrite'           => array( 
+						'slug' => 'genre',
+					),
 				));
 		}
 	}
